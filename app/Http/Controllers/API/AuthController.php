@@ -88,7 +88,6 @@ class AuthController extends Controller
                 'message' => 'Unauthorized',
             ], 401);
         }
-
         $user = Auth::guard('api')->user();
         return response()->json([
                 'status' => 'success',
