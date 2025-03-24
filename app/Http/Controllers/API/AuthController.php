@@ -1,108 +1,77 @@
 <?php
-
 namespace App\Http\Controllers\API;
+
 use App\Http\Controllers\Controller;
-
-
-use App\Models\User;
-use Illuminate\Http\Request;
+use App\Http\Requests\RegisterUserRequest;
+use App\Http\Requests\LoginUserRequest;
+use App\Services\UserService;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
+    protected $userService;
 
-    public function __construct()
+    public function __construct(UserService $userService)
     {
-        $this->middleware('auth:api', ['except' => ['login','register','refresh','logout']]);
+        $this->userService = $userService;
     }
 
-    public function register(Request $request){
-        
-        // dd($request);
-
-        $validatedData=$request->validate([
-            'first_name' => 'required|string|max:255',
-            'last_name' => 'required|string|max:255',
-            'phone' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:6',           
-            'status' => 'required|string|in:actif,inactif',
-            'role' => 'required|string|in:admin,recruteur,candidat',
-        ]);
-
-        $existingUser = User::where('email', $validatedData['email'])->first();
-
-        if ($existingUser) {
-            return response()->json([
-                'error' => 'The email address is already registered. Please choose a different email.',
-            ], 422); 
-        }
-        
-        if ($request->hasFile('photo')) {
-            $photoPath = $request->file('photo')->store('profil_photos', 'public');
-        } else {
-            $photoPath = null;  
-        }
-    
-  
-// dd($photoPath);
-
-        $user = User::create([
-            'first_name' => $validatedData['first_name'],   
-            'last_name' => $validatedData['last_name'],     
-            'phone' => $validatedData['phone'],             
-            'photo' => $photoPath,             
-            'email' => $validatedData['email'],             
-            'password' => Hash::make($validatedData['password']),  
-            'status' => $validatedData['status'],           
-            'role' => $validatedData['role'],               
-        ]);
-        
-        
-
-        $token = Auth::guard('api')->login($user);
-        return response()->json([
-            'status' => 'success',
-            'message' => 'User created successfully',
-            'user' => $user,
-            'authorisation' => [
-                'token' => $token,
-                'type' => 'bearer',
-            ]
-        ]);
-    }
-
-    public function login(Request $request)
+    // Méthode pour enregistrer l'utilisateur
+    public function register(RegisterUserRequest $request)
     {
-        $request->validate([
-            'email' => 'required|string|email',
-            'password' => 'required|string',
-        ]);
-        $credentials = $request->only('email', 'password');
+        $validatedData = $request->validated();
+        
+        $user = $this->userService->registerUser($validatedData);
 
-        $token = Auth::guard('api')->attempt($credentials);
-        if (!$token) {
+        if ($user) {
+            $token = Auth::guard('api')->login($user);
+
             return response()->json([
-                'status' => 'error',
-                'message' => 'Unauthorized',
-            ], 401);
-        }
-        $user = Auth::guard('api')->user();
-        return response()->json([
                 'status' => 'success',
+                'message' => 'User created successfully',
                 'user' => $user,
                 'authorisation' => [
                     'token' => $token,
                     'type' => 'bearer',
                 ]
             ]);
+        }
 
+        return response()->json([
+            'error' => 'The email address is already registered. Please choose a different email.',
+        ], 422);
+    }
+
+
+    public function login(LoginUserRequest $request)
+    {
+        $request->validated();
+
+        $credentials = $request->only('email', 'password');
+
+        $result = $this->userService->authenticate($credentials);
+
+        if (!$result) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Unauthorized',
+            ], 401);
+        }
+
+        return response()->json([
+            'status' => 'success',
+            'user' => $result['user'],
+            'authorisation' => [
+                'token' => $result['token'],
+                'type' => 'bearer',
+            ]
+        ]);
     }
 
     public function logout()
     {
-        Auth::guard('api')->logout();
+        $this->userService->logout();
+
         return response()->json([
             'status' => 'success',
             'message' => 'Successfully logged out',
@@ -110,17 +79,17 @@ class AuthController extends Controller
     }
 
 
-    // public function refresh()
-    // {
-    //     return response()->json([
-    //         'status' => 'success',
-    //         'user' => Auth::guard('api')->user(),
-    //         'authorisation' => [
-    //             'token' => Auth::guard('api')->refresh(),
-    //             'type' => 'bearer',
-    //         ]
-    //     ]);
-    // }
+//     // public function refresh()
+//     // {
+//     //     return response()->json([
+//     //         'status' => 'success',
+//     //         'user' => Auth::guard('api')->user(),
+//     //         'authorisation' => [
+//     //             'token' => Auth::guard('api')->refresh(),
+//     //             'type' => 'bearer',
+//     //         ]
+//     //     ]);
+//     // }
 
 
     
