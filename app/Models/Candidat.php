@@ -5,13 +5,18 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Condidat extends Model
+class Candidat extends Model
 {
     use HasFactory;
     protected $fillable=[
-        'bio ',
+        'user_id',
+        'bio',
         'fonction',
         'niveau',
         'experience'
     ];
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

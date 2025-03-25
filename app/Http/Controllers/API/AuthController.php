@@ -6,6 +6,7 @@ use App\Http\Requests\RegisterUserRequest;
 use App\Http\Requests\LoginUserRequest;
 use App\Services\UserService;
 use Illuminate\Support\Facades\Auth;
+use Spatie\LaravelIgnition\Recorders\DumpRecorder\Dump;
 
 class AuthController extends Controller
 {
@@ -20,7 +21,7 @@ class AuthController extends Controller
     public function register(RegisterUserRequest $request)
     {
         $validatedData = $request->validated();
-        
+        // Dump($validatedData);
         $user = $this->userService->registerUser($validatedData);
 
         if ($user) {
@@ -72,6 +73,7 @@ class AuthController extends Controller
     {
         $this->userService->logout();
 
+        // Retourner une réponse de succès après la déconnexion
         return response()->json([
             'status' => 'success',
             'message' => 'Successfully logged out',

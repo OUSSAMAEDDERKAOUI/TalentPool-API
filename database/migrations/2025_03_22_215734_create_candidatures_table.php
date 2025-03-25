@@ -14,6 +14,7 @@ return new class extends Migration
     {
         Schema::create('candidatures', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->constrained('users'); 
             $table->string('cv');
             $table->text('lettre_motivation');
             $table->foreignId('annonce_id')->constrained('annonces');

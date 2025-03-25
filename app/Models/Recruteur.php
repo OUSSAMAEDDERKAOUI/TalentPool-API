@@ -10,10 +10,10 @@ class Recruteur extends Model
     use HasFactory;
     protected  $fillable=[
         'user_id',
-        'company ',
-        'poste ',
-        'sector ',
-        'city '
+        'company',
+        'poste',
+        'sector',
+        'city'
     ];
     public function user()
     {
