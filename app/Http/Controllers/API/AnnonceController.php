@@ -1,21 +1,35 @@
 <?php
 
 namespace App\Http\Controllers\API;
-use App\Http\Controllers\Controller;
 use App\Models\Annonce;
-use Illuminate\Support\Facades\Auth;
-
 use Illuminate\Http\Request;
+use App\Services\AnnonceService;
+use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
+use App\Http\Requests\RequestAnnonce;
 use Spatie\LaravelIgnition\Recorders\DumpRecorder\Dump;
 
 class AnnonceController extends Controller
 {
+
+    protected $AnnonceService;
+
+    public function __construct(AnnonceService $AnnonceService)
+    {
+        $this->AnnonceService = $AnnonceService;
+    }
+
  /**
      * Display a listing of the resource.
      */
     public function index()
     {
-
+$annonces=DB::table("annonces")->get();
+return response()->json([
+    'status'=>"l'affichage de toutes les annonces",
+    'annonces'=>$annonces,
+]);
 
     }
 
@@ -29,26 +43,17 @@ class AnnonceController extends Controller
      * Store a newly created resource in storage.
      */
 
-    public function store(Request $request)
+    public function store(RequestAnnonce $request)
     {
-        // Validation des données de la requête
-        $validatedData = $request->validate([
-            'title' => 'required|string|max:250',
-            'description' => 'required|string|max:1000',
-        ]);
+        $validatedData = $request->validated();
+    // dump($validatedData);
     
-        // Création de la nouvelle annonce avec l'ID de l'utilisateur authentifié
-        $annonce = Annonce::create([
-            'user_id' => Auth::user()->id, // Utilisation d'Auth::user()->id pour récupérer l'ID de l'utilisateur authentifié
-            'title' => $validatedData['title'],
-            'description' => $validatedData['description'],
-        ]);
-    
-        // Retourner la réponse JSON avec un message de succès et l'annonce créée
+        $annonce = $this->AnnonceService->registerAnnonce($validatedData);
+
         return response()->json([
             'status' => "L'annonce a été ajoutée avec succès.",
             'annonce' => $annonce,
-        ], 201); // Code HTTP 201 pour indiquer que l'annonce a été créée
+        ], 201); 
     }
     
 
@@ -57,7 +62,7 @@ class AnnonceController extends Controller
      */
     public function show(Annonce $Annonce)
     {
-        //
+
     }
 
     /**

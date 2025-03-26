@@ -17,7 +17,6 @@ class AuthController extends Controller
         $this->userService = $userService;
     }
 
-    // Méthode pour enregistrer l'utilisateur
     public function register(RegisterUserRequest $request)
     {
         $validatedData = $request->validated();

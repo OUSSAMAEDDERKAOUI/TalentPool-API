@@ -19,4 +19,7 @@ class Recruteur extends Model
     {
         return $this->belongsTo(User::class);
     }
+    public function annonces(){
+        return $this->hasMany(Annonce::class,'user_id');
+    }
 }
