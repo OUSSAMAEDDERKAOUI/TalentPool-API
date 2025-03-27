@@ -20,7 +20,16 @@ class CandidatureController extends Controller
  /**
      * Display a listing of the resource.
      */
- 
+    public function index()
+    {
+
+        $Candidature=$this->CandidatureService->showAllCandidature();
+        return response()->json([
+         'status'=>"l'affichage de toutes les Candidature",
+         'Candidature'=>$Candidature,
+]);
+
+    }
 
     
     public function create()
