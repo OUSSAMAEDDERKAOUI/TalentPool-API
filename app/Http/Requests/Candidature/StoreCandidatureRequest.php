@@ -21,6 +21,7 @@ class StoreCandidatureRequest extends FormRequest
             'cv' => 'required|file|mimes:pdf,doc,docx|max:2048',
             'lettre_motivation' => 'required|string|max:5000',
             'annonce_id' => 'required|exists:annonces,id',
+            'status' => 'nullable|in:en_attente,accepté,refusé',
         ];
     }
 }

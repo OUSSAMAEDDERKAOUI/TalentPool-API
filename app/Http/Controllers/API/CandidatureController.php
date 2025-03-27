@@ -8,6 +8,8 @@ use App\Http\Requests\Candidature\StoreCandidatureRequest;
 use App\Http\Requests\Candidature\UpdateCandidatureRequest;
 
 use App\Services\CandidatureService;
+use Illuminate\Contracts\Support\ValidatedData;
+
 class CandidatureController extends Controller
 {
     protected $CandidatureService;
@@ -83,7 +85,7 @@ class CandidatureController extends Controller
         $validatedData=$request->validated();
         // dd($validatedData);
         $Candidature = $this->CandidatureService->updateCandidature($validatedData,$Candidature);
-
+dd($Candidature);
         return  response()->json([
             'Candidature' => $Candidature,
         ]); 
@@ -96,6 +98,24 @@ class CandidatureController extends Controller
     {
         $Candidature->delete();
         return response()->json(['message' => 'Candidature deleted successfully'], 200);
+    }
+
+
+
+
+
+    public function updateStatus(Request $request,Candidature $Candidature){
+
+$ValidatedData=$request->validate([
+    'status'=>'required|in:en_attente,accepté,refusé',
+]);
+
+dd($ValidatedData);
+
+        $Candidature = $this->CandidatureService->updateStatus($ValidatedData,$Candidature);
+        return  response()->json([
+            'Candidature' => $Candidature,
+        ]); 
     }
 }
 

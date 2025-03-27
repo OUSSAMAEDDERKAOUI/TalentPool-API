@@ -21,7 +21,7 @@ public function __construct(Candidature $CandidatureModel){
             $CandidatureData['cv'] = $CandidatureData['cv']->store('cv_candidature', 'public');
         }
         $Candidature = Candidature::create([
-            'user_id' => 1, 
+            'user_id' => 3, 
             'cv' => $CandidatureData['cv'],
             'lettre_motivation' => $CandidatureData['lettre_motivation'],
             'annonce_id' => $CandidatureData['annonce_id'],
@@ -41,6 +41,12 @@ public function __construct(Candidature $CandidatureModel){
     public function showAllCandidatures(){
         $Candidatures=DB::table("candidatures")->get();
         return $Candidatures;
+
+    }
+    public function  updateStatus(array $CandidatureData , Candidature $Candidature){
+        
+        $Candidature->update($CandidatureData);
+        return $Candidature;
 
     }
  

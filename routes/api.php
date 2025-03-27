@@ -18,6 +18,7 @@ use App\Http\Controllers\API\AuthController;
 | be assigned to the "api" middleware group. Make something great!
 |
 */
+Route::patch('candidature/{condidature}/updated',[CandidatureController::class,'updateStatus']);
 
 Route::apiResource('annonce',AnnonceController::class);
 Route::apiResource('candidature',CandidatureController::class);

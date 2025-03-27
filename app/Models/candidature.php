@@ -13,5 +13,12 @@ class Candidature extends Model
         'cv',
         'lettre_motivation',
         'annonce_id',
+        'status',
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
 }

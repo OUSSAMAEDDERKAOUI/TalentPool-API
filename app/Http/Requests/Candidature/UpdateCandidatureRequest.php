@@ -20,6 +20,7 @@ class UpdateCandidatureRequest extends FormRequest
             'cv' => 'nullable|file|mimes:pdf,doc,docx|max:2048',
             'lettre_motivation' => 'nullable|string|max:5000',
             'annonce_id' => 'nullable|exists:annonces,id',
+            'status' => 'nullable|in:en_attente,accepté,refusé',
         ];
     }
 }

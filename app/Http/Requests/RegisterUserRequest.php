@@ -48,7 +48,7 @@ class RegisterUserRequest extends FormRequest
             $rules['niveau'] = 'required|string|max:255';  
             $rules['experience'] = 'required|string|max:255';  
             $rules['bio'] = 'required|string|max:500'; 
-            $rules['function'] = 'required|string|max:500'; 
+            $rules['fonction'] = 'required|string|max:500'; 
         }
 
         return $rules;
