@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use App\Repositories\CandidatureRepository;
 use Illuminate\Support\Facades\Notification;
-use App\Notifications\CandidatureStatusUpdate;
+use App\Mail\CandidatureStatusUpdate;
 
 class CandidatureService
 {
@@ -35,7 +35,9 @@ class CandidatureService
 
     if (isset($candidatureData['status'])) {
         // dump($candidatureData['status']);
-        Notification::send($candidature->user, new CandidatureStatusUpdate($candidature));
+        // Mail::send($candidature->user, new CandidatureStatusUpdate($candidature));
+        Mail::to($candidature->user)->send(new CandidatureStatusUpdate($candidature));
+
     }
 
     return $candidature;
