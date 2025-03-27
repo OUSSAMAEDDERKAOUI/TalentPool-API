@@ -7,7 +7,8 @@ use App\Services\AnnonceService;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
-use App\Http\Requests\RequestAnnonce;
+use App\Http\Requests\Annonces\RequestAnnonce;
+use App\Http\Requests\Annonces\UpdateAnnonceRequest;
 use Spatie\LaravelIgnition\Recorders\DumpRecorder\Dump;
 
 class AnnonceController extends Controller
@@ -25,10 +26,11 @@ class AnnonceController extends Controller
      */
     public function index()
     {
-$annonces=DB::table("annonces")->get();
-return response()->json([
-    'status'=>"l'affichage de toutes les annonces",
-    'annonces'=>$annonces,
+
+        $annonces=$this->AnnonceService->showAllAnnonces();
+        return response()->json([
+         'status'=>"l'affichage de toutes les annonces",
+         'annonces'=>$annonces,
 ]);
 
     }
@@ -46,7 +48,6 @@ return response()->json([
     public function store(RequestAnnonce $request)
     {
         $validatedData = $request->validated();
-    // dump($validatedData);
     
         $annonce = $this->AnnonceService->registerAnnonce($validatedData);
 
@@ -63,6 +64,9 @@ return response()->json([
     public function show(Annonce $Annonce)
     {
 
+    return  response()->json([
+               'annonce' => $Annonce,
+           ]); 
     }
 
     /**
@@ -76,9 +80,16 @@ return response()->json([
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Annonce $Annonce)
+    public function update(UpdateAnnonceRequest $request, Annonce $Annonce)
     {
-        //
+
+        $validatedData=$request->validated();
+
+        $annonce = $this->AnnonceService->updateAnnonce($validatedData,$Annonce);
+
+        return  response()->json([
+            'annonce' => $annonce,
+        ]); 
     }
 
     /**
@@ -86,6 +97,7 @@ return response()->json([
      */
     public function destroy(Annonce $Annonce)
     {
-        //
+        $Annonce->delete();
+        return response()->json(['message' => 'Annonce deleted successfully'], 200);
     }
 }

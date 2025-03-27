@@ -1,8 +1,9 @@
 <?php
 namespace App\Repositories;
+use App\Models\User;
 use App\Models\Annonce;
 use App\Models\Candidature;
-use App\Models\User;
+use Illuminate\Support\Facades\DB;
 
 
 
@@ -24,6 +25,19 @@ public function __construct(Annonce $AnnonceModel){
         return $annonce;
 
     }
+
+    public function  updateAnnonce(array $annonceData , Annonce $annonce){
+        $annonce->update($annonceData);
+        return $annonce;
+
+    }
+
+    public function showAllAnnonces(){
+        $annonces=DB::table("annonces")->get();
+        return $annonces;
+
+    }
+ 
 
 
 
