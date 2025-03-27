@@ -16,4 +16,10 @@ class Annonce extends Model
     public function recruteur(){
         return $this->belongsTo(User::class,'user_id');
     }
+
+
+    public function candidatures()
+    {
+        return $this->hasMany(Candidature::class);
+    }
 }

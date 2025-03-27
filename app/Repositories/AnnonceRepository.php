@@ -4,6 +4,8 @@ use App\Models\User;
 use App\Models\Annonce;
 use App\Models\Candidature;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Http\Request;
+
 
 
 
@@ -37,7 +39,24 @@ public function __construct(Annonce $AnnonceModel){
         return $annonces;
 
     }
- 
+    public function getCandidaturesByAnnonce($annonceId, Request $request)
+    {
+        $annonce = Annonce::find($annonceId);
+
+        if (!$annonce) {
+            return response()->json(['message' => 'Annonce non trouvée'], 404);
+        }
+
+        $query = $annonce->candidatures();
+
+        if ($request->has('status')) {
+            $query->where('status', $request->get('status'));
+        }
+
+        $candidatures = $query->get();
+
+        return $candidatures;
+    }
 
 
 

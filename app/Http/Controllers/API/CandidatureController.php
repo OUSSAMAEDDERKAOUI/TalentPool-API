@@ -85,7 +85,7 @@ class CandidatureController extends Controller
         $validatedData=$request->validated();
         // dd($validatedData);
         $Candidature = $this->CandidatureService->updateCandidature($validatedData,$Candidature);
-dd($Candidature);
+// dd($Candidature);
         return  response()->json([
             'Candidature' => $Candidature,
         ]); 
@@ -104,18 +104,6 @@ dd($Candidature);
 
 
 
-    public function updateStatus(Request $request,Candidature $Candidature){
-
-$ValidatedData=$request->validate([
-    'status'=>'required|in:en_attente,accepté,refusé',
-]);
-
-dd($ValidatedData);
-
-        $Candidature = $this->CandidatureService->updateStatus($ValidatedData,$Candidature);
-        return  response()->json([
-            'Candidature' => $Candidature,
-        ]); 
-    }
+    
 }
 

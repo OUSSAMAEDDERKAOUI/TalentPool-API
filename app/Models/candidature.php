@@ -20,5 +20,8 @@ class Candidature extends Model
     {
         return $this->belongsTo(User::class);
     }
-
+    public function annonce()
+    {
+        return $this->belongsTo(Annonce::class);
+    }
 }

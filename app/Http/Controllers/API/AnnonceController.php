@@ -100,4 +100,17 @@ class AnnonceController extends Controller
         $Annonce->delete();
         return response()->json(['message' => 'Annonce deleted successfully'], 200);
     }
+
+
+
+   
+    
+    public function getCandidaturesByAnnonce($annonceId, Request $request)
+    {
+
+        $annonce = $this->AnnonceService->getCandidaturesByAnnonce($annonceId,$request);
+
+
+        return response()->json(['candidatures' => $annonce]);
+    }
 }
