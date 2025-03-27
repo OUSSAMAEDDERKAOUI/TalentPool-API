@@ -31,6 +31,7 @@ class CandidatureService
         return $Candidature;
             
         }
+
         public function showAllCandidature(){
             $condidatures=$this->CandidatureRepository->showAllCandidatures();
             return $condidatures;
