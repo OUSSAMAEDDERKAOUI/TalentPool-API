@@ -32,7 +32,10 @@ class CandidatureService
             
         }
 
-     
+        public function showAllCandidature(){
+            $condidatures=$this->CandidatureRepository->showAllCandidatures();
+            return $condidatures;
+        }
   
 }
 
