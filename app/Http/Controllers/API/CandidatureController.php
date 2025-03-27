@@ -78,6 +78,7 @@ class CandidatureController extends Controller
      */
     public function update(UpdateCandidatureRequest $request, Candidature $Candidature)
     {
+        // dump($request);
 
         $validatedData=$request->validated();
         // dd($validatedData);
@@ -91,8 +92,10 @@ class CandidatureController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-   
-
-
+    public function destroy(Candidature $Candidature)
+    {
+        $Candidature->delete();
+        return response()->json(['message' => 'Candidature deleted successfully'], 200);
+    }
 }
 
