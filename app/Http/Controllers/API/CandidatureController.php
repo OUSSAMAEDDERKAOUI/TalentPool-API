@@ -78,7 +78,6 @@ class CandidatureController extends Controller
      */
     public function update(UpdateCandidatureRequest $request, Candidature $Candidature)
     {
-        // dump($request);
 
         $validatedData=$request->validated();
         // dd($validatedData);
@@ -93,5 +92,7 @@ class CandidatureController extends Controller
      * Remove the specified resource from storage.
      */
    
+
+
 }
 
