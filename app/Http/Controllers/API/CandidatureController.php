@@ -54,4 +54,44 @@ class CandidatureController extends Controller
     }
     
 
+    /**
+     * Display the specified resource.
+     */
+    public function show(Candidature $Candidature)
+    {
+
+    return  response()->json([
+               'Candidature' => $Candidature,
+           ]); 
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function edit(Candidature $Candidature)
+    {
+        //
+    }
+
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(UpdateCandidatureRequest $request, Candidature $Candidature)
+    {
+        // dump($request);
+
+        $validatedData=$request->validated();
+        // dd($validatedData);
+        $Candidature = $this->CandidatureService->updateCandidature($validatedData,$Candidature);
+
+        return  response()->json([
+            'Candidature' => $Candidature,
+        ]); 
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     */
+   
+}
 
