@@ -26,7 +26,11 @@ class CandidatureService
             return $candidature;
 
     }
-  
+    public function updateCandidature(array $candidatureData , Candidature $Candidature){
+        $Candidature=$this->CandidatureRepository->updateCandidature($candidatureData,$Candidature);
+        return $Candidature;
+            
+        }
 
      
   
