@@ -47,6 +47,6 @@ class CandidaturePolicy
     public function create(User $user)
     {
         
-        return $user->is_active; 
+        return $user->status==='actif'; 
     }
 }

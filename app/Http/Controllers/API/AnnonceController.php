@@ -26,6 +26,7 @@ class AnnonceController extends Controller
      */
     public function index()
     {
+        $this->authorize('index', Annonce::class); 
 
         $annonces=$this->AnnonceService->showAllAnnonces();
         return response()->json([
@@ -47,6 +48,10 @@ class AnnonceController extends Controller
 
     public function store(RequestAnnonce $request)
     {
+
+        $this->authorize('create', Annonce::class); 
+        $this->authorize('create', Annonce::class); 
+
         $validatedData = $request->validated();
     
         $annonce = $this->AnnonceService->registerAnnonce($validatedData);
@@ -63,6 +68,7 @@ class AnnonceController extends Controller
      */
     public function show(Annonce $Annonce)
     {
+        $this->authorize('show', Annonce::class);
 
     return  response()->json([
                'annonce' => $Annonce,
