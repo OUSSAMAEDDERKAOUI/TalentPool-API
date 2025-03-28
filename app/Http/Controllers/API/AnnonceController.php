@@ -82,6 +82,7 @@ class AnnonceController extends Controller
      */
     public function update(UpdateAnnonceRequest $request, Annonce $Annonce)
     {
+        $this->authorize('update', $Annonce);
 
         $validatedData=$request->validated();
 
@@ -97,6 +98,8 @@ class AnnonceController extends Controller
      */
     public function destroy(Annonce $Annonce)
     {
+        $this->authorize('delete', $Annonce);
+
         $Annonce->delete();
         return response()->json(['message' => 'Annonce deleted successfully'], 200);
     }

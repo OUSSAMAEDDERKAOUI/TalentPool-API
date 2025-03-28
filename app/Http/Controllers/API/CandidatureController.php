@@ -45,6 +45,7 @@ class CandidatureController extends Controller
 
     public function store(StoreCandidatureRequest $request)
     {
+
         $validatedData = $request->validated();
     
         $Candidature = $this->CandidatureService->registerCandidature($validatedData);
@@ -80,12 +81,10 @@ class CandidatureController extends Controller
      */
     public function update(UpdateCandidatureRequest $request, Candidature $Candidature)
     {
-        // dump($request);
+        $this->authorize('update', $Candidature);
 
         $validatedData=$request->validated();
-        // dd($validatedData);
         $Candidature = $this->CandidatureService->updateCandidature($validatedData,$Candidature);
-// dd($Candidature);
         return  response()->json([
             'Candidature' => $Candidature,
         ]); 
@@ -96,6 +95,8 @@ class CandidatureController extends Controller
      */
     public function destroy(Candidature $Candidature)
     {
+        $this->authorize('delete', $Candidature);
+
         $Candidature->delete();
         return response()->json(['message' => 'Candidature deleted successfully'], 200);
     }
