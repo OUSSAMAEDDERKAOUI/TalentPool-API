@@ -37,7 +37,7 @@ class AnnoncePolicy
     }
 
     
-    public function index(User $user, Annonce $annonce){
+    public function index(User $user){
         return true;
     }
 
@@ -48,10 +48,5 @@ class AnnoncePolicy
 
 
 
-    public function create(User $user)
-    {
-        
-        return $user->status==='actif'; 
-    }
-}
 
+}

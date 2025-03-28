@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\API\AnnonceController;
 use App\Http\Controllers\API\CandidatureController;
+use App\Http\Controllers\API\AdminController;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -37,3 +38,5 @@ Route::group(['middleware'=>['auth:api','CheckRole:candidat']],function(){
 
 });
 
+
+Route::middleware(['auth:api','CheckRole:admin'])->get('/admin/statistics', [AdminController::class, 'index']);

@@ -7,6 +7,7 @@ use App\Services\AnnonceService;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 use App\Http\Requests\Annonces\RequestAnnonce;
 use App\Http\Requests\Annonces\UpdateAnnonceRequest;
 use Spatie\LaravelIgnition\Recorders\DumpRecorder\Dump;
@@ -50,7 +51,6 @@ class AnnonceController extends Controller
     {
 
         $this->authorize('create', Annonce::class); 
-        $this->authorize('create', Annonce::class); 
 
         $validatedData = $request->validated();
     
@@ -68,8 +68,9 @@ class AnnonceController extends Controller
      */
     public function show(Annonce $Annonce)
     {
-        $this->authorize('show', Annonce::class);
-
+        if (Gate::denies('show', $Annonce)) {
+            abort(403, 'Unauthorized action.');
+        }
     return  response()->json([
                'annonce' => $Annonce,
            ]); 
