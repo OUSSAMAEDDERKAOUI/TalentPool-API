@@ -24,7 +24,7 @@ class CandidatureController extends Controller
      */
     public function index()
     {
-
+        $this->authorize('index', Candidature::class);
         $Candidature=$this->CandidatureService->showAllCandidature();
         return response()->json([
          'status'=>"l'affichage de toutes les Candidature",
@@ -45,6 +45,7 @@ class CandidatureController extends Controller
 
     public function store(StoreCandidatureRequest $request)
     {
+        $this->authorize('create', Candidature::class); 
 
         $validatedData = $request->validated();
     
@@ -62,7 +63,7 @@ class CandidatureController extends Controller
      */
     public function show(Candidature $Candidature)
     {
-
+$this->authorize('show', $Candidature);
     return  response()->json([
                'Candidature' => $Candidature,
            ]); 

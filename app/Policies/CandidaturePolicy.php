@@ -33,4 +33,20 @@ class CandidaturePolicy
     {
         return $user->id === $candidature->user_id;
     }
+
+
+    public function index(User $user, Candidature $candidature){
+        return true;
+    }
+    public function show(User $user, Candidature $candidature){
+        return $user->id=== $candidature->user_id;
+    }
+
+
+
+    public function create(User $user)
+    {
+        
+        return $user->is_active; 
+    }
 }
