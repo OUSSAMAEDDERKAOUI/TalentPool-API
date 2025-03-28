@@ -1,23 +1,33 @@
 <?php
 
+
 namespace Database\Factories;
 
+use App\Models\Annonce;
+use App\Models\User; // N'oubliez pas d'importer le modèle User
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-/**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Annonce>
- */
 class AnnonceFactory extends Factory
 {
     /**
-     * Define the model's default state.
+     * Le modèle que cette factory va générer.
      *
-     * @return array<string, mixed>
+     * @var string
      */
-    public function definition(): array
+    protected $model = Annonce::class;
+
+    /**
+     * Définir le modèle par défaut pour la factory.
+     *
+     * @return array
+     */
+    public function definition()
     {
         return [
-            //
+            'user_id' => User::factory(), 
+            'title' => $this->faker->sentence(), 
+            'description' => $this->faker->paragraph(),
         ];
     }
 }
+

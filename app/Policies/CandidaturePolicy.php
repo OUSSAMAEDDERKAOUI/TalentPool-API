@@ -35,7 +35,7 @@ class CandidaturePolicy
     }
 
 
-    public function index(User $user, Candidature $candidature){
+    public function index(User $user){
         return true;
     }
     public function show(User $user, Candidature $candidature){
