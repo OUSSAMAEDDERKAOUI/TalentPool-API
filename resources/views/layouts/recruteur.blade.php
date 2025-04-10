@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TalentPool - Dashboard Recruteur</title>
+    <title>TalentPool -  @yield('title')</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
@@ -145,7 +145,7 @@
 
         <main class="flex-1 relative overflow-y-auto focus:outline-none">
 
-@yield(content);
+@yield('content');
 </main>
         </body>
         </html>

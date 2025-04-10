@@ -26,3 +26,8 @@ Route::get('/auth/login', function () {
 Route::get('/auth/register', function () {
     return view('auth/register'); 
 })->name('login');
+
+
+Route::get('/recruteur/dashboard', function () {
+    return view('/recruteur/dashboard'); 
+})->name('recruteur_dashboard');
