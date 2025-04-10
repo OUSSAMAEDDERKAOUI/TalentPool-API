@@ -31,3 +31,13 @@ Route::get('/auth/register', function () {
 Route::get('/recruteur/dashboard', function () {
     return view('/recruteur/dashboard'); 
 })->name('recruteur_dashboard');
+
+Route::get('/recruteur/annonces' , function(){
+    return view('/recruteur/annonces');
+});
+Route::get('/recruteur/candidatures' , function(){
+    return view('/recruteur/candidatures');
+});
+Route::get('/recruteur/profile' , function(){
+    return view('/recruteur/profile');
+});

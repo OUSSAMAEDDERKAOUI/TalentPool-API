@@ -24,6 +24,8 @@ class UpdateAnnonceRequest extends FormRequest
         return [
             'title' => 'required|string|max:250',
             'description' => 'required|string|max:1000',
-                ];
+            'status' => 'required|in:actif,inactif',
+        ];
+        
     }
 }
