@@ -20,10 +20,9 @@ Route::get('/', function () {
 
 
 Route::get('/auth/login', function () {
-    return view('auth/login'); // Le nom du fichier Blade (ex: resources/views/login.blade.php)
+    return view('auth/login'); 
 })->name('login');
 
-
 Route::get('/auth/register', function () {
-    return view('auth/register'); // Le nom du fichier Blade (ex: resources/views/login.blade.php)
+    return view('auth/register'); 
 })->name('login');
