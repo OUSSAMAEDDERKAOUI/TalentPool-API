@@ -70,12 +70,12 @@
                         </a>
                         <a href="#" class="group flex items-center px-2 py-2 text-sm font-medium rounded-md text-gray-600 hover:bg-gray-50 hover:text-gray-900">
                             <i class="fas fa-chart-line mr-3 text-gray-400"></i>
-                            Statistiques
+                             Paramètres
                         </a>
-                        <a href="#" class="group flex items-center px-2 py-2 text-sm font-medium rounded-md text-gray-600 hover:bg-gray-50 hover:text-gray-900">
+                        <button onclick="logout()" class="group flex items-center px-2 py-2 text-sm font-medium rounded-md text-gray-600 hover:bg-gray-50 hover:text-gray-900">
                             <i class="fas fa-cog mr-3 text-gray-400"></i>
-                            Paramètres
-                        </a>
+                            Déconnexion
+                        </button>
                     </nav>
                 </div>
                 <div class="flex-shrink-0 flex border-t border-gray-200 p-4">
@@ -129,7 +129,7 @@
                             <div id="profileDropdown" class="hidden origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5">
                                 <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Votre profil</a>
                                 <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Paramètres</a>
-                                <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Déconnexion</a>
+                                <button onclick="logout()"  class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Déconnexion</button>
                             </div>
                         </div>
                     </div>
@@ -145,7 +145,15 @@
 
         <main class="flex-1 relative overflow-y-auto focus:outline-none">
 
-@yield('content');
+@yield('content')
 </main>
+
+<script>
+    function logout() {
+    localStorage.removeItem('token');
+    window.location.href = '/auth/login';
+}
+
+</script>
         </body>
         </html>

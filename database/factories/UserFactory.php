@@ -31,7 +31,7 @@ class UserFactory extends Factory
             'role' => $this->faker->randomElement(['admin', 'recruteur', 'candidat']),
             'email' => $this->faker->unique()->safeEmail,
             'email_verified_at' => now(),
-            'password' => bcrypt('password'),
+            'password' => bcrypt('azerty'),
             'remember_token' => Str::random(10), // Utilisation de Str::random ici
         ];
     }

@@ -22,13 +22,14 @@ use App\Http\Controllers\API\AuthController;
         Route::post('logout', [AuthController::class, 'logout'])->middleware('auth:api');
     });
        
+    
+    Route::group(['middleware'=>['auth:api','CheckRole:recruteur']],function(){
+        Route::apiResource('annonce', AnnonceController::class);  
 
-Route::group(['middleware'=>['auth:api','CheckRole:recruteur']],function(){
-
-    Route::apiResource('annonce', AnnonceController::class);  
     Route::get('annonce/{annonceId}/candidatures', [AnnonceController::class, 'getCandidaturesByAnnonce']);
 
 });
+
 
 
 Route::group(['middleware'=>['auth:api','CheckRole:candidat']],function(){

@@ -24,9 +24,12 @@ class AnnonceFactory extends Factory
     public function definition()
     {
         return [
-            'user_id' => User::factory(), 
+            'user_id' => 14, 
             'title' => $this->faker->sentence(), 
             'description' => $this->faker->paragraph(),
+            'status' => $this->faker->randomElement(['actif', 'inactif']),
+
+
         ];
     }
 }

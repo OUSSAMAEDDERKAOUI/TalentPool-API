@@ -5,6 +5,7 @@ namespace App\Policies;
 use App\Models\User;
 use App\Models\Annonce;
 use Illuminate\Auth\Access\HandlesAuthorization;
+use Illuminate\Support\Facades\Log;
 
 class AnnoncePolicy
 {
@@ -31,10 +32,13 @@ class AnnoncePolicy
      */
 
 
-    public function delete(User $user, Annonce $Annonce)
-    {
-        return $user->id === $Annonce->user_id;
-    }
+    // app/Policies/AnnoncePolicy.php
+public function delete(User $user, Annonce $annonce)
+{
+    // Vérifie si l'utilisateur connecté est celui qui a créé l'annonce
+    return $user->id === $annonce->user_id;
+}
+
 
     
     public function index(User $user){
