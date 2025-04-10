@@ -17,7 +17,7 @@ class AdminController extends Controller
      */
     public function index()
     {
-        $this->authorize('index', User::class); 
+        // $this->authorize('index', User::class); 
 
         $totalUsers = User::count();
 

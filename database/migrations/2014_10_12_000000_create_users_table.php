@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('last_name');
             $table->string('phone');
             $table->string('photo');
-            $table->enum('status',['actif','inactif']);
+            $table->enum('status',['actif','inactif'])->default("actif");
             $table->enum('role', ['admin', 'recruteur', 'candidat'])->default('candidat');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();

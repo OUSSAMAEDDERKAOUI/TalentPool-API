@@ -16,3 +16,14 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+
+
+Route::get('/auth/login', function () {
+    return view('auth/login'); // Le nom du fichier Blade (ex: resources/views/login.blade.php)
+})->name('login');
+
+
+Route::get('/auth/register', function () {
+    return view('auth/register'); // Le nom du fichier Blade (ex: resources/views/login.blade.php)
+})->name('login');

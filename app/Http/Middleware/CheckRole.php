@@ -37,7 +37,6 @@ class CheckRole
 
 private function hasValidRole($user, $roles)
 {
-    // Vérifier le rôle de l'utilisateur 
     return in_array($user->role, $roles);
 }
 

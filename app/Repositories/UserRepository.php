@@ -34,7 +34,7 @@ class UserRepository
             'phone' => $userData['phone'],
             'email' => $userData['email'],
             'password' => $userData['password'],  
-            'status' => $userData['status'],
+            // 'status' => $userData['status'],
             'role' => $userData['role'],
             'photo' => $userData['photo'] ?? null,
         ]);

@@ -50,7 +50,7 @@ class AnnonceController extends Controller
     public function store(RequestAnnonce $request)
     {
 
-        $this->authorize('create', Annonce::class); 
+        // $this->authorize('create', Annonce::class); 
 
         $validatedData = $request->validated();
     

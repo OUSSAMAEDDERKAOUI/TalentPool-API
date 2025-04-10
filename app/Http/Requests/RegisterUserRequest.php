@@ -22,7 +22,7 @@ class RegisterUserRequest extends FormRequest
             'phone' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:6', 
-            'status' => 'required|string|in:actif,inactif',
+            'status' => 'nullable|string|in:actif,inactif',
             'role' => 'required|string|in:admin,recruteur,candidat',
             'photo' => 'nullable|file|image|mimes:jpeg,png,jpg,gif,svg|max:2048', 
             'company' => 'nullable|string',
