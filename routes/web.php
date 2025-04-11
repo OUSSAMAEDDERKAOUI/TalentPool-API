@@ -30,7 +30,7 @@ Route::get('/auth/register', function () {
 
 Route::get('/recruteur/dashboard', function () {
     return view('/recruteur/dashboard'); 
-})->name('recruteur_dashboard');
+})->name('recruteur/dashboard');
 
 Route::get('/recruteur/annonces' , function(){
     return view('/recruteur/annonces');

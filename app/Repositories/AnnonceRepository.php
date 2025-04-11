@@ -20,7 +20,7 @@ public function __construct(Annonce $AnnonceModel){
 
     public function  createAnnonce(array $annonceData){
         $annonce = Annonce::create([
-            'user_id' => 1, 
+            'user_id' => auth()->id(), 
             'title' => $annonceData['title'],
             'description' => $annonceData['description'],
         ]);

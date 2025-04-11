@@ -22,7 +22,7 @@ class RequestAnnonce extends FormRequest
     public function rules(): array
     {
         return [
-            'user_id'=>'required|integer|max:250',
+            'user_id'=>'nullable|integer|max:250',
             'title' => 'required|string|max:250',
             'description' => 'required|string|max:1000',
         ];

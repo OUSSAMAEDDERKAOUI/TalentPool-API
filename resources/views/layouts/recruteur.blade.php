@@ -93,7 +93,7 @@
         </div>
 
         <div class="flex-1 overflow-auto focus:outline-none">
-            <div class="relative z-10 flex-shrink-0 flex h-16 bg-white border-b border-gray-200">
+            <div class="relative z-1 flex-shrink-0 flex h-16 bg-white border-b border-gray-200">
                 <button id="sidebarButton" class="md:hidden px-4 border-r border-gray-200 text-gray-500 focus:outline-none focus:bg-gray-100 focus:text-gray-600">
                     <i class="fas fa-bars"></i>
                 </button>
