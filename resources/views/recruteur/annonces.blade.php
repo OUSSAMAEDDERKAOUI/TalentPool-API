@@ -116,6 +116,30 @@
     </div>
 </div>
 
+<div id="editAnnonce" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-20">
+    <div class="bg-white p-6 rounded-lg w-full max-w-lg shadow-lg">
+      <h2 class="text-xl font-bold mb-4">Modifier l'annonce</h2>
+      <form id="editForm">
+        <input type="hidden" name="id" id="edit-id">
+        <div class="mb-4">
+          <label for="edit-title" class="block text-sm font-medium text-gray-700">Titre</label>
+          <input type="text" name="title" id="edit-title" class="mt-1 block w-full border p-2 rounded" required>
+        </div>
+        <div class="mb-4">
+          <label for="edit-description" class="block text-sm font-medium text-gray-700">Description</label>
+          <textarea name="description" id="edit-description" class="mt-1 block w-full border p-2 rounded" rows="5" required></textarea>
+        </div>
+        <div class="flex justify-end space-x-2">
+          <button type="button" id="cancelEdit" class="bg-gray-200 px-4 py-2 rounded">Annuler</button>
+          <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded">Enregistrer</button>
+        </div>
+      </form>
+    </div>
+  </div>
+  
+
+
+
 
 
 
@@ -124,73 +148,7 @@
 
 
 <script src="{{asset('/js/recruteur/annonces.js') }}"></script>
-{{-- 
-<script>
-   const form = document.getElementById('annonceForm');
-    if (form) {
-        form.addEventListener('submit', async function(e) {
-            e.preventDefault();
-            const formData = new FormData(form);
-            const data = Object.fromEntries(formData.entries());
 
-
-            try {
-                const response = await fetch('/api/annonce', {
-                    method: 'POST',
-                    headers: {
-                        'Accept': 'application/json',
-                        'Authorization': `Bearer ${localStorage.getItem('token')}`
-                    },
-                    body: formData
-                });
-
-                const result = await response.json();
-
-                if (response.ok) {
-                    alert('Ajout réussie !');
-                    const tbody = document.querySelector('tbody');
-        const newRow = `
-            <tr>
-                <td class="px-6 py-4 whitespace-nowrap">
-                    <div class="text-sm font-medium text-gray-900">${data.title}</div>
-                </td>
-                <td class="px-6 py-4 whitespace-nowrap">
-                    <div class="text-sm text-gray-900">${new Date(data.created_at).toLocaleDateString()}</div>
-                </td>
-                <td class="px-6 py-4 whitespace-nowrap">
-                    <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${
-                        data.status === 'actif' ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'
-                    }">
-                        ${data.status}
-                    </span>
-                </td>
-                <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                    <div class="flex justify-end space-x-2">
-                        <button class="text-indigo-600 hover:text-indigo-900 p-1"><i class="fas fa-eye"></i></button>
-                        <button class="text-blue-600 hover:text-blue-900 p-1"><i class="fas fa-edit"></i></button>
-                        <button class="text-red-600 hover:text-red-900 p-1"><i class="fas fa-trash"></i></button>
-                    </div>
-                </td>
-            </tr>
-        `;
-        tbody.insertAdjacentHTML('beforeend', newRow);
-
-        // Fermer le formulaire modal après ajout
-        document.getElementById('addAnnonce').classList.add('hidden');
-
-                    // location.reload(); // Optionnel : pour rafraîchir les données
-                } else {
-                    alert(result.message || "Une erreur s'est produite");
-                }
-            } catch (error) {
-                console.error('Erreur réseau:', error);
-                alert("Une erreur s'est produite");
-            }
-        });
-    }
-
-</script>
-     --}}
 
 
 

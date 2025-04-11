@@ -130,6 +130,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
+    @vite(['resources/js/app.js'])
+
 </head>
 <body>
     <div class="min-h-screen bg-[url('./image/recrutement.jpg')] bg-cover bg-center flex items-center justify-center p-4">
@@ -199,6 +201,7 @@
     </div>
 
     <script>
+
         // Rediriger automatiquement si déjà connecté
         if (localStorage.getItem('token')) {
             window.location.href = "/recruteur/annonces"; 
@@ -236,6 +239,47 @@
                 alert("Une erreur s'est produite");
             }
         });
+        // Rediriger automatiquement si déjà connecté
+
+
+
+// if (Cookies.get('token')) {  // Vérifie si le cookie 'token' existe
+//     window.location.href = "/recruteur/annonces"; 
+// }
+
+// document.getElementById('loginForm').addEventListener('submit', async function (e) {
+//     e.preventDefault();
+
+//     const email = document.getElementById('email').value;
+//     const password = document.getElementById('password').value;
+
+//     try {
+//         const response = await fetch('/api/login', {
+//             method: 'POST',
+//             headers: {
+//                 'Content-Type': 'application/json',
+//                 'Accept': 'application/json'
+//             },
+//             body: JSON.stringify({ email, password })
+//         });
+// alert();
+//         const data = await response.json();
+
+//         if (response.ok) {
+//             // Stocker le token dans un cookie avec expiration de 7 jours
+//             Cookies.set('token', data.authorisation.token, { expires: 7 });
+
+//             alert('Connexion réussie !');
+//             window.location.href = "/recruteur/annonces"; 
+//         } else {
+//             alert(data.message || "Échec de connexion");
+//         }
+//     } catch (error) {
+//         console.error('Erreur:', error);
+//         alert("Une erreur s'est produite");
+//     }
+// });
+
     </script>
 </body>
 </html>

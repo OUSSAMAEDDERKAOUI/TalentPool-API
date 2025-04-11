@@ -68,9 +68,9 @@ class AnnonceController extends Controller
      */
     public function show(Annonce $Annonce)
     {
-        if (Gate::denies('show', $Annonce)) {
-            abort(403, 'Unauthorized action.');
-        }
+        $this->authorize('show',$Annonce);
+
+  
     return  response()->json([
                'annonce' => $Annonce,
            ]); 
@@ -89,7 +89,7 @@ class AnnonceController extends Controller
      */
     public function update(UpdateAnnonceRequest $request, Annonce $Annonce)
     {
-        // $this->authorize('update', $Annonce);
+        $this->authorize('update', $Annonce);
 
         $validatedData=$request->validated();
 
@@ -107,23 +107,23 @@ class AnnonceController extends Controller
     public function destroy(Annonce $annonce)
     {
         // Vérifie si l'utilisateur est authentifié
-        $user = auth()->user();
+        // $user = auth()->user();
     
-        if (!$user) {
-            // Si l'utilisateur n'est pas authentifié, renvoie une réponse 401 Unauthorized
-            return response()->json(['message' => 'Non authentifié'], 401);
-        }
+        // if (!$user) {
+        //     // Si l'utilisateur n'est pas authentifié, renvoie une réponse 401 Unauthorized
+        //     return response()->json(['message' => 'Non authentifié'], 401);
+        // }
     
-        // Vérifie si l'utilisateur connecté est celui qui a créé l'annonce
-        if ($user->id !== $annonce->user_id) {
-            dump($user->id);
-            dump($annonce->user_id);
-            // Si l'utilisateur n'a pas le droit de supprimer l'annonce
-            return response()->json(['message' => 'Non autorisé'], 403);
-        }
+        // // Vérifie si l'utilisateur connecté est celui qui a créé l'annonce
+        // if ($user->id !== $annonce->user_id) {
+        //     dump($user->id);
+        //     dump($annonce->user_id);
+        //     // Si l'utilisateur n'a pas le droit de supprimer l'annonce
+        //     return response()->json(['message' => 'Non autorisé'], 403);
+        // }
     
-        // Si l'utilisateur est autorisé, supprimer l'annonce
-        // $this->authorize('delete',$annonce);
+        // // Si l'utilisateur est autorisé, supprimer l'annonce
+        $this->authorize('delete',$annonce);
         $annonce->delete();
     
         return response()->json(['message' => 'Annonce supprimée avec succès'], 200);

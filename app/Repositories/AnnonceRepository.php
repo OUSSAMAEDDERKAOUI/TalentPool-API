@@ -35,7 +35,7 @@ public function __construct(Annonce $AnnonceModel){
     }
 
     public function showAllAnnonces(){
-        $annonces=DB::table("annonces")->get();
+        $annonces=DB::table("annonces")->where('user_id',auth()->id())->get();
         return $annonces;
 
     }
