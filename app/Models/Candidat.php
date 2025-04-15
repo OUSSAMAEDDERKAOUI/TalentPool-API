@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Candidature;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Candidat extends Model
 {
@@ -18,5 +19,9 @@ class Candidat extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+    public function candidatures()
+    {
+        return $this->hasMany(Candidature::class);
     }
 }

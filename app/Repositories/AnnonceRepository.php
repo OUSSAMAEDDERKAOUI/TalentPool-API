@@ -37,8 +37,14 @@ public function __construct(Annonce $AnnonceModel){
     public function showAllAnnonces(){
         $annonces=DB::table("annonces")->where('user_id',auth()->id())->get();
         return $annonces;
-
     }
+
+
+    public function index(){
+        $annonces=DB::table("annonces")->get();
+        return $annonces;
+    }
+
     public function getCandidaturesByAnnonce($annonceId, Request $request)
     {
         $annonce = Annonce::find($annonceId);

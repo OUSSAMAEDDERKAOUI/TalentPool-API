@@ -28,10 +28,10 @@
                 </div>
                 <nav class="mt-8 flex-1 px-2 space-y-1">
                   
-                    <a href="/recruteur/annonces" class="group flex items-center px-2 py-2 text-sm font-medium rounded-md text-gray-600 hover:bg-gray-50 hover:text-gray-900">
+                    <a href="/candidat/annonces" class="group flex items-center px-2 py-2 text-sm font-medium rounded-md text-gray-600 hover:bg-gray-50 hover:text-gray-900">
                         <i class="fas fa-briefcase mr-3 text-gray-400"></i> Annonces
                     </a>
-                    <a href="/recruteur/candidatures" class="group flex items-center px-2 py-2 text-sm font-medium rounded-md text-gray-600 hover:bg-gray-50 hover:text-gray-900">
+                    <a href="/candidat/candidatures" class="group flex items-center px-2 py-2 text-sm font-medium rounded-md text-gray-600 hover:bg-gray-50 hover:text-gray-900">
                         <i class="fas fa-user-tie mr-3 text-gray-400"></i> Candidatures
                     </a>
                     <a href="#" class="group flex items-center px-2 py-2 text-sm font-medium rounded-md text-gray-600 hover:bg-gray-50 hover:text-gray-900">

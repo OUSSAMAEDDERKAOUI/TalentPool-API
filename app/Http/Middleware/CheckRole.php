@@ -18,6 +18,7 @@ class CheckRole
     $user = $request->user();
 
     if (!$user) {
+        
         return response()->json([
             'error' => 'User is not authenticated',
             'message' => 'You need to be logged in to access this resource.'

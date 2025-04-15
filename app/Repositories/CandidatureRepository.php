@@ -39,7 +39,7 @@ public function __construct(Candidature $CandidatureModel){
     }
 
     public function showAllCandidatures(){
-        $Candidatures=DB::table("candidatures")->get();
+        $Candidatures = Candidature::with(['candidat', 'annonce.recruteur'])->get();
         return $Candidatures;
 
     }

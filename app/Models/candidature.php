@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Candidature extends Model
 {
@@ -16,12 +17,18 @@ class Candidature extends Model
         'status',
     ];
 
-    public function user()
+    public function candidat()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'user_id'); 
     }
+    
     public function annonce()
     {
         return $this->belongsTo(Annonce::class);
     }
+    
+
+    
+    
+   
 }

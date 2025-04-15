@@ -130,7 +130,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
-    @vite(['resources/js/app.js'])
 
 </head>
 <body>
@@ -202,8 +201,9 @@
 
     <script>
 
-        // Rediriger automatiquement si déjà connecté
-        if (localStorage.getItem('token')) {
+        // Rediriger  si déjà connecté
+        if (document.cookie.split('; ').filter((item) => item.startsWith('Access-Token=')).length > 0) {
+            alert(2)
             window.location.href = "/recruteur/annonces"; 
         }
 
@@ -224,13 +224,18 @@
                 });
 
                 const data = await response.json();
-
+// console.log(data);
                 if (response.ok) {
 
                   localStorage.setItem('token', data.authorisation.token);
 
                     alert('Connexion réussie !');
-                    window.location.href = "/recruteur/annonces"; 
+                    if(data.user.role==='recruteur'){
+                      window.location.href = "/recruteur/annonces"; 
+                    }
+                    else if(data.user.role==='candidat'){
+                      window.location.href = "/candidat/annonces"; 
+                    }
                 } else {
                     alert(data.message || "Échec de connexion");
                 }

@@ -23,7 +23,7 @@ class CandidatureFactory extends Factory
     public function definition(): array
     {
         return [
-            'user_id' => User::factory(), 
+            'user_id' => 14, 
             'cv' => $this->faker->word() . '.pdf', 
             'lettre_motivation' => $this->faker->paragraph(), 
             'annonce_id' => Annonce::factory(), 

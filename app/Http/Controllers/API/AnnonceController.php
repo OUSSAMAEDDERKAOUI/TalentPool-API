@@ -27,9 +27,20 @@ class AnnonceController extends Controller
      */
     public function index()
     {
-        $this->authorize('index', Annonce::class); 
+        // $this->authorize('index', Annonce::class); 
 
         $annonces=$this->AnnonceService->showAllAnnonces();
+        return response()->json([
+         'status'=>"l'affichage de toutes les annonces",
+         'annonces'=>$annonces,
+]);
+
+    }
+    public function showAll()
+    {
+        // $this->authorize('index', Annonce::class); 
+
+        $annonces=$this->AnnonceService->index();
         return response()->json([
          'status'=>"l'affichage de toutes les annonces",
          'annonces'=>$annonces,
@@ -66,15 +77,14 @@ class AnnonceController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Annonce $Annonce)
+    public function show(Annonce $annonce)
     {
-        $this->authorize('show',$Annonce);
-
-  
-    return  response()->json([
-               'annonce' => $Annonce,
-           ]); 
+        $annonce->load('recruteur'); 
+        return response()->json([
+            'annonce' => $annonce
+        ]);
     }
+    
 
     /**
      * Show the form for editing the specified resource.

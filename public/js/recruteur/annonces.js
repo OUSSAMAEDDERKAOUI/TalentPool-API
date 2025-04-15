@@ -1,11 +1,12 @@
 
 document.addEventListener('DOMContentLoaded', async () => {
-    const token = localStorage.getItem('token');
-
-    if (!token) {
+    const token = Cookies.get('Access-Token');
+    
+    if (token.length == 0) {
         window.location.href = '/auth/login'; 
         return;
     }
+
 
     try {
         const response = await fetch('/api/annonce', {

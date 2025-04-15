@@ -26,6 +26,13 @@ public function showAllAnnonces(){
     return $annonces;
 }
 
+
+public function index(){
+    $annonces=$this->annonceRepository->index();
+    return $annonces;
+}
+
+
 public function updateAnnonce(array $annonceData , Annonce $annonce){
     $annonce=$this->annonceRepository->updateAnnonce($annonceData,$annonce);
     return $annonce;

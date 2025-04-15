@@ -4,6 +4,7 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 
 use App\Models\recruteur;
+use App\Models\Recruteur as ModelsRecruteur;
 use Illuminate\Http\Request;
 
 class RecruteurController extends Controller
@@ -13,7 +14,7 @@ class RecruteurController extends Controller
      */
     public function index()
     {
-        //
+        
     }
 
     /**
@@ -37,7 +38,8 @@ class RecruteurController extends Controller
      */
     public function show(recruteur $recruteur)
     {
-        //
+        $recruteur=recruteur::findOrFail($recruteur);
+        return response()->json($recruteur);
     }
 
     /**

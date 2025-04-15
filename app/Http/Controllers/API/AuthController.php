@@ -6,6 +6,7 @@ use App\Http\Requests\RegisterUserRequest;
 use App\Http\Requests\LoginUserRequest;
 use App\Services\UserService;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cookie;
 use Spatie\LaravelIgnition\Recorders\DumpRecorder\Dump;
 
 class AuthController extends Controller
@@ -58,6 +59,8 @@ class AuthController extends Controller
             ], 401);
         }
 
+        $cookie = Cookie('Access-Token', $result['token'], 60, null, null, null, false);
+
         return response()->json([
             'status' => 'success',
             'user' => $result['user'],
@@ -65,7 +68,7 @@ class AuthController extends Controller
                 'token' => $result['token'],
                 'type' => 'bearer',
             ]
-        ]);
+        ])->withCookie($cookie);
     }
 
     public function logout()

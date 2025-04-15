@@ -1,16 +1,20 @@
 <?php
 
-use App\Http\Controllers\API\AnnonceController;
-use App\Http\Controllers\API\CandidatureController;
-use App\Http\Controllers\API\AdminController;
-
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\AuthController;
 
+use App\Http\Controllers\API\AdminController;
+use App\Http\Controllers\API\AnnonceController;
+use App\Http\Controllers\API\RecruteurController;
+use App\Http\Controllers\API\CandidatureController;
 
 
 
+
+Route::middleware('auth:api')->get('/me', function (Request $request) {
+    return response()->json($request->user());
+});
 
 
 
@@ -24,18 +28,24 @@ use App\Http\Controllers\API\AuthController;
        
     
     Route::group(['middleware'=>['auth:api','CheckRole:recruteur']],function(){
+        Route::get('annonce/{annonceId}/candidatures', [AnnonceController::class, 'getCandidaturesByAnnonce']);
         Route::apiResource('annonce', AnnonceController::class);  
 
-    Route::get('annonce/{annonceId}/candidatures', [AnnonceController::class, 'getCandidaturesByAnnonce']);
+        Route::post('candidature/{candidature}', [CandidatureController::class, 'update']);  
 
 });
 
+Route::apiResource('recruteur', RecruteurController::class);  
 
+
+Route::get('annonces', [AnnonceController::class, 'showAll']);
+
+        Route::apiResource('candidature', CandidatureController::class);  
 
 Route::group(['middleware'=>['auth:api','CheckRole:candidat']],function(){
+    // Route::apiResource('candidature', CandidatureController::class);  
 
-    Route::apiResource('candidature', CandidatureController::class);  
-    Route::post('candidature/{candidature}', [CandidatureController::class, 'update']);  
+    // Route::post('candidature/{candidature}', [CandidatureController::class, 'update']);  
 
 });
 

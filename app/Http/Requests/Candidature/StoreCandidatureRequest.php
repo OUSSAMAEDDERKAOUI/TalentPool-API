@@ -17,7 +17,7 @@ class StoreCandidatureRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'user_id' => 'required|exists:users,id',
+            'user_id' => 'nullable|exists:users,id',
             'cv' => 'required|file|mimes:pdf,doc,docx|max:2048',
             'lettre_motivation' => 'required|string|max:5000',
             'annonce_id' => 'required|exists:annonces,id',

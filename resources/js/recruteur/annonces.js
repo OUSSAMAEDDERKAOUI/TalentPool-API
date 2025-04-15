@@ -1,4 +1,13 @@
+alert('l')
 document.addEventListener('DOMContentLoaded', async () => {
+    const token = Cookies.get('Access-Token');
+
+    if (token.length == 0) {
+        alert()
+        window.location.href = '/auth/login'; 
+        return;
+    }
+    alert('d')
     try {
         const response = await fetch('/api/annonce', {
             headers: {

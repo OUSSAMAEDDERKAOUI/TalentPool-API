@@ -24,7 +24,8 @@ class CandidatureController extends Controller
      */
     public function index()
     {
-        $this->authorize('index', Candidature::class);
+        // $this->authorize('index', Candidature::class);
+
         $Candidature=$this->CandidatureService->showAllCandidature();
         return response()->json([
          'status'=>"l'affichage de toutes les Candidature",
