@@ -18,7 +18,7 @@
 
 <script>
 document.querySelector('#app').innerHTML = `
-   <div class="min-h-screen bg-[url('./image/recrutement.jpg')] bg-cover bg-center relative">
+<div class="min-h-screen bg-[url('{{ asset('storage/background_image/Recrutement-prédictif.png') }}')] bg-cover bg-center flex items-center justify-center p-4">
     <!-- Overlay avec effet de dégradé -->
     <div class="absolute inset-0 bg-gradient-to-br from-black/60 via-black/50 to-black/30 backdrop-blur-[2px]"></div>
     

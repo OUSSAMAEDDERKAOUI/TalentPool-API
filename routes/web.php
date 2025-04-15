@@ -55,3 +55,6 @@ Route::get('/candidat/annonces' , function(){
 Route::get('/candidat/details' , function(){
     return view('/candidat/details');
 });
+Route::get('/admin/statistics' , function(){
+    return view('/admin/dashboard');
+});
